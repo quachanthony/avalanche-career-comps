@@ -1,0 +1,23 @@
+name: Reproduce article
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  article:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@v10.3.3
+        with:
+          python-version: "3.13"
+          enable-cache: true
+      - run: uv sync --locked --group analysis --group dev
+      - run: uv run --locked --group analysis --group dev pytest -q tests
+      - run: uv run --locked --group dev ruff check .
+      - run: uv run --locked --group dev ruff format --check .
+      - run: uv run --locked --group analysis python -m avalanche_career_comps.pipeline --no-figures --out local/ci-reproduction

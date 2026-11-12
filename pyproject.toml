@@ -1,0 +1,30 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "avalanche-career-comps"
+version = "0.1.0"
+description = "Reproducible NHL career comparisons behind an Avalanche Substack article"
+requires-python = ">=3.11"
+dependencies = []
+
+[dependency-groups]
+analysis = ["matplotlib>=3.11.2,<4", "numpy>=2.4.6,<3"]
+dev = ["pytest>=8,<10", "ruff>=0.11,<1"]
+
+[project.scripts]
+avalanche-career-comps = "avalanche_career_comps.pipeline:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/avalanche_career_comps"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint.isort]
+known-first-party = ["avalanche_career_comps"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,40 @@
+{
+  "description": "The ten published article figures. Rebuild with python -m avalanche_career_comps.pipeline.",
+  "input_sha256": "9e5f288e212e94a1785c92036bf7833b473e7f6ff473da5ed7a61e3ff6800409",
+  "code_sha256": {
+    "__init__.py": "21eb5eecbf750e78c3ca4c0d8c31440976364c19eecbda2c0c0cf3afa359c34a",
+    "analysis.py": "97e000369c6a9e9c508e9adfd73a0703969b25871553cdc8657cf5e76822a896",
+    "article_analysis.py": "5cdc46bd3fe2bf63ad7fcd384369bf4af5c8c2bbd8a10263a86131a8d3babb25",
+    "article_radar.py": "8b4445f003210a592c21183e5b41342287f73400f19b7204c602eb2580505164",
+    "distinctiveness.py": "e2a6e0c4e4d75c9a6dc0a61fcea023f22b9c7235da5313bb9514de88684ab818",
+    "era.py": "15ca05efcc9b1091d49354af13aa17ed7f1b2793c374c16570e2aa07f01dae28",
+    "goalie_performance.py": "0c4317770d054c5f2de98896c660504fab8193999c02d27441c7e62f4aec873a",
+    "goalie_quality.py": "1e198b49162bafd29c0b27f9bc4c1a6727393f64d72730f5c8c8609ab1bc5e0e",
+    "goalie_revision.py": "4ae923550a167cf611506a12cc4b1d4115620fcde7cf0ce038819d7483747d96",
+    "inputs.py": "8ec5cf716f8a803f398a09796eb743545df91d8a23b5bc0583242363c07d298f",
+    "lineup_radar.py": "f8c1798170675030176cc1d3e721c0de51c116f735fa54b3d48336b61aaec526",
+    "makar_compact.py": "e1134298ffecd7932f94230e0629400a99f1337abd2643d9489078d95268bf2b",
+    "makar_compact_graphics.py": "f5b5614bd78e42b67e12e0119fdb0bebacac25229280dc38445a5caea4ae1b82",
+    "makar_deep_dive.py": "4dadf1979d39e1a1b3187a078a7f5eb71193695d3b01692cc10bf5505056233e",
+    "pipeline.py": "d34c0f259ca42a8d27f4d51c32565aca1939327d2844ab65a921b760b043b8af",
+    "publication.py": "71432f57718202573d68ace2026d22a0de2d344dac936c7cca2cae96abe3785e",
+    "radar.py": "e6a661d13a12977ad20275f8da7f60d07e9945f49ace75e5abbf7d3313d07c7f",
+    "reverse_similarity.py": "8b974ff68c26e1e869748d605e7714219090ca4c70e5bd027ec08720c953535a",
+    "special_teams.py": "2fa98bc7230e9b693834f5c5d1c94abae61d182e439cb77797afc9e93ef72d64"
+  },
+  "source_manifest_sha256": "047b98a6e1942a115d6199b80d671c4e13394d59335737229052206576ecdfca",
+  "core_input_fingerprint": "cb2838f663fd83b2cf5cd106bc31c7be63c5456cd413531da28aeb2f2f2e261b",
+  "outputs_sha256": {
+    "01-lehkonen-mackinnon-necas.png": "695e65aa7add8a1168cb3fa2cc3b0820c39cc07d86d9d7a36ab5ac3c6777f84c",
+    "02-landeskog-nelson-roy.png": "1a50546857c69ca827ba89683ea7ad284ab74f34a808105420b35726516f0627",
+    "03-schwartz-kadri-hughes.png": "ed3a916801823ba0e489b67ed5f18a7ccb4b67522d052b9afacab858083c8e8d",
+    "04-kelly-svechkov-oconnor.png": "5c8f32a8222a7c34890da734cdaaf99b1e8606c4f1504f96597fa25a055b91af",
+    "05-toews-makar.png": "90efeb25ad4c85d04d58b2b93ed14e4ee1d132a80adcd35efdfac51a22870561",
+    "06-kulak-manson.png": "4cb08171092080c58ee9510cd31bc4132b6cba0a5f58fdf4f04706e55d52788e",
+    "07-malinski-burns.png": "50cfd58a91022365a0f0fb4012b5b5650171c3a487278b85c6fb06406c71dfca",
+    "08-blackwood-wedgewood.png": "35cc6095a6b4914235852b90218ba2181620ed350c1c88cfdd506666907a1569",
+    "all-hail-cale.png": "aa5068761e610f87c1570e39e7c8f215dd775a1c945f38db0b8beedb0e58d0b6",
+    "loosely-the-moose.png": "fff5e066aa62040dba8b53867af90aad872519fed435f9af306a053f6f57f537"
+  },
+  "numeric_regression_sha256": "9978d8d34c3cf792b5d34716a6c8ef9571a597ed093bd35a4ef1c57f6659aadd"
+}
