@@ -1,5 +1,24 @@
 # Avalanche career comparisons
 
+## Proposed article-feedback revision
+
+The new [rate-profile revision](docs/revised-method.md) preserves every eligible alumnus,
+removes career games from the matching score, and supplies phone-readable charts, visible
+gaps, a same-age example, alt text and article-ready explanations. The original baseline
+below remains reproducible. This is a model revision: many matches change, and Cale’s
+ratio becomes 5.13× rather than reusing the old 4.61×.
+
+```sh
+uv run --locked --group analysis python -m avalanche_career_comps.feedback_analysis \
+  --omit-career-games --out local/article-feedback
+```
+
+Open `local/article-feedback/article-preview.html`. See the [revision figures](figures/revision-v2/README.md)
+and the [factual and prose corrections](docs/article-revision-notes.md). Omit
+`--omit-career-games` to retain career length while fixing only the PK pool policy.
+
+## Original article baseline
+
 Which former Avalanche players have NHL careers most similar to the current roster?
 This is the reproducible analysis behind Anthony's first Avalanche Substack article,
 including the Cale Makar and Peter Forsberg comparisons.

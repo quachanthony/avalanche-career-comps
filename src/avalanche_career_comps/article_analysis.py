@@ -61,7 +61,7 @@ def check_warehouse_audit(audit, input_sha):
         raise ValueError("The warehouse and frozen league environments disagree.")
 
 
-def rerun(bundle, scoring, rates, ice_time):
+def rerun(bundle, scoring, rates, ice_time, *, skater_ranker=None):
     """Use the selected PP/PK method directly, with independent career windows."""
     last = bundle["config"]["last_season"]
     players = {p["player_id"]: p for p in bundle["players"]}
@@ -141,7 +141,8 @@ def rerun(bundle, scoring, rates, ice_time):
                 }
                 target_pk = None
             else:
-                ranked, scales, details = special_teams.rank_without_lift(target, pool, ice_time)
+                ranker = skater_ranker or special_teams.rank_without_lift
+                ranked, scales, details = ranker(target, pool, ice_time)
                 target_pk = special_teams.pk_context(target, ice_time)
             best = ranked[0]
             flags = []

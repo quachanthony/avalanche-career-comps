@@ -38,7 +38,7 @@ def candidate_players(bundle, target_id):
     ]
 
 
-def compare(bundle, target_id, scoring, rates, ice_time):
+def compare(bundle, target_id, scoring, rates, ice_time, *, skater_ranker=None):
     """Keep full observed careers, the existing era adjustment, and the PK rule."""
     last = bundle["config"]["last_season"]
     league = {r["season_id"]: r for r in bundle["league"]}
@@ -62,7 +62,8 @@ def compare(bundle, target_id, scoring, rates, ice_time):
             excluded[str(exc)] += 1
     if len(pool) < 2:
         raise ValueError("The reverse comparison requires at least two eligible candidates.")
-    matches, scales, details = special_teams.rank_without_lift(target, pool, ice_time)
+    ranker = skater_ranker or special_teams.rank_without_lift
+    matches, scales, details = ranker(target, pool, ice_time)
     current_ids = {p["player_id"] for p in bundle["roster"]}
     return {
         "question": f"Which eligible past or present Avalanche skaters have observed NHL careers most similar to {target['name']}?",

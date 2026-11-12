@@ -30,8 +30,8 @@ def validate_radar(report):
     keys = report["feature_order"]
     if len(profiles) != 5 or len({p["player_id"] for p in profiles}) != 5:
         raise ValueError("The compact career figure requires five distinct players.")
-    if sum(p["player_id"] == MAKAR for p in profiles) != 1 or len(keys) != 6:
-        raise ValueError("The compact radar requires Makar and the six common career stats.")
+    if sum(p["player_id"] == MAKAR for p in profiles) != 1 or len(keys) not in {5, 6}:
+        raise ValueError("The compact radar requires Makar and the common career stats.")
     low, high = report["radial_bounds"]
     if not low < 0 < high:
         raise ValueError("The shared radial bounds must include the alumni-average ring.")
