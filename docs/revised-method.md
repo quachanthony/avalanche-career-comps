@@ -1,10 +1,12 @@
-# Proposed rate-profile revision
+# Current rate-profile method
 
-This review version addresses historical PK coverage and career-length artifacts.
-It preserves the original data and the original six-stat model as a reproducible baseline.
+This is the primary article model, confirmed on November 12, 2026. Full observed
+careers lead the article; career games are displayed as sample-size context and carry
+no similarity weight. The original data and original six-stat model remain preserved
+as a reproducible baseline.
 The baseline is available at commit `2033214` of the public repository.
 
-## What changes
+## Primary choices
 
 1. **Preserve the whole eligible pool.** A missing PK record removes that feature from
    a comparison, never an otherwise eligible alumnus. PK could enter at 10% only when
@@ -59,7 +61,7 @@ because a career contains missing or disagreeing minute records.
 
 For Makar, all 45 historical defensemen participate in both the roster search and the
 special overlay. His gap to Bourque is **1.401108**. The median historical nearest-match
- gap is **0.272958**, giving **5.133045×**. The means, spreads and weights are fitted to
+gap is **0.272958**, giving **5.133045×**. The means, spreads and weights are fitted to
 those 45 alumni and held fixed for all pairs. Self-matches are excluded. Adding Makar
 to the nearest-neighbor search changes Bourque's own nearest match to Makar; this is
 recorded in the report, rather than retaining the original assumption that no historical
@@ -89,20 +91,22 @@ calls it nearly tied. MacKinnon remains third.
 - Alt text is supplied for every image, plus a 1200×675 preview. Alt text must be pasted
   into Substack when replacing images; PNG files alone cannot set the site's alt fields.
 
-## Reproduce and review
+## Reproduce the primary article
 
 ```sh
 uv run --locked --group analysis python -m avalanche_career_comps.feedback_analysis \
-  --omit-career-games --out local/article-feedback
+  --out local/article-feedback
 ```
 
-Omit `--omit-career-games` for the pool-preserving control that retains career length.
-Both controls are calculated and recorded in the sensitivity files for either command.
+The default omits career games from matching. Add `--include-career-games` for the
+pool-preserving sensitivity control that retains career length. The older
+`--omit-career-games` flag remains accepted for compatibility. Both controls are
+calculated and recorded in the sensitivity files for either command.
 Use an empty output directory. No database access or downloads occur.
 
 The output includes `article-preview.html`, `article-explanations.txt`, `alt-text.csv`,
 full and same-age graphics, raw results, changes and fingerprints. The explanatory text
-is a proposed replacement; this workflow does not edit or publish the Substack post.
+describes the selected primary model; this workflow does not edit or publish the Substack post.
 
 See [factual coverage and source notes](article-revision-notes.md) and
 [official data provenance](sources.md).

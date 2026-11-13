@@ -95,6 +95,8 @@ was explored separately. It sorts adjusted seasonal Point Shares from best to wo
 applies season-rank weights of 1.00, 0.95, 0.90 and so on. Those are weights on ranked
 seasons, not weights on goals, assists or other individual statistics. Direct access
 returned HTTP 403 in the recheck; the official-domain indexed method text was readable.
-The final article uses the six/seven-feature model documented in [methods.md](methods.md),
-with the four-feature goalie revision. No Point Shares, WAR, hits, debut age or recent
+The primary article uses the five-rate-stat model documented in
+[the current method](revised-method.md), with the unchanged four-feature goalie model.
+The original six/seven-feature method remains documented in
+[the historical baseline](methods.md) for controlled comparisons. No Point Shares, WAR, hits, debut age or recent
 scoring-lift feature enters these published comparisons.

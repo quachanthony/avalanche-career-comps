@@ -1,8 +1,10 @@
-# How the comparisons work
+# Original baseline method and shared equations
 
-> **Version note:** This document records the original six-stat baseline. The proposed
-> [rate-profile revision](revised-method.md) preserves the full PK pool and treats career
-> games as context. Its revised weights and results are documented separately.
+> **Historical baseline:** This document records the original six/seven-stat model,
+> including its former PK pool restriction and weighted career length. It is not the
+> primary article method. The selected [current rate-profile method](revised-method.md)
+> uses five rate statistics, preserves the full eligible pool and leaves career games
+> unweighted. The era-adjustment and distance equations below remain shared.
 
 The question is which eligible former Avalanche player has the closest statistical
 career profile to each player on the saved Colorado roster. This is a descriptive

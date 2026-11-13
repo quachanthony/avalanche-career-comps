@@ -1,7 +1,8 @@
-# Article revision notes
+# Current article explanations and revision notes
 
-These notes describe the proposed revised rate-profile model and supply replacement
-explanations. Full careers remain primary, career games are unweighted context, and PK
+These notes describe the primary rate-profile model selected on November 12, 2026
+and supply article-ready explanations. Full careers remain primary, career games
+are unweighted context, and PK
 coverage cannot shrink the eligible pool. The original six-stat model is preserved as
 a baseline; a separate control retains career length while fixing only the PK policy.
 
@@ -34,11 +35,11 @@ Suggested subtitle:
 > their differences into one statistical gap. The smallest gap identifies the closest
 > available comparison; it does not mean the two players have identical styles or ability.
 
-State the final feature list in the method notes. If career games are retained, explain
-that they enter as `log(1 + GP)`, although the charts show ordinary games played. If they
-are omitted, say that games describe the amount of observed history and do not affect
-the match. Full-career and same-age are different comparison windows, not age-curve
-estimates or projections of unfinished careers.
+The primary model uses five rate statistics: goals, assists, shots, penalty minutes
+and power-play points per 82 games. Career games describe the amount of observed
+history and do not affect the match. The `--include-career-games` control retains
+`log(1 + GP)` for sensitivity analysis only. Full-career and same-age are different
+comparison windows, not age-curve estimates or projections of unfinished careers.
 
 ## PK coverage and the historical cutoff
 
@@ -51,21 +52,20 @@ has usable PK records covering only **315 of 708** career games, with missing or
 records extending through 1999–2000. Successful retrieval of a report is not evidence
 that its minute fields are complete.
 
-Replacement explanation for a pool-preserving rule:
+Current PK explanation:
 
 > NHL ice-time records begin in 1997–98, and some later records are incomplete or fail
 > consistency checks. I do not treat missing minutes as zero. When PK coverage is
 > incomplete for an eligible comparison, I leave PK out of that comparison rather than
 > remove otherwise eligible alumni.
 
-Use that paragraph only with the pool-preserving implementation. The prior rule ranked
-only alumni with complete minutes when PK was active, so it changed both the feature
-set and the candidate pool. That distinction must not remain implicit in an old chart
-or in an explanation of a revised result.
+The original baseline ranked only alumni with complete minutes when PK was active,
+so it changed both the feature set and the candidate pool. That historical restriction
+is preserved only for comparison; it does not apply to the primary article model.
 
 ## Weights and career games
 
-The existing six-stat model allocates weights of 17.5 to goals, 17.5 to assists, 15 to
+The original six-stat baseline allocates weights of 17.5 to goals, 17.5 to assists, 15 to
 shots, 10 to penalty minutes, 20 to log career games, and 10 to PP points. These sum to
 90 and are normalized to 100% when PK is absent. PK adds 10 only under its declared
 coverage rule. The resulting six-stat percentages are **19.44%, 19.44%, 16.67%, 11.11%,
@@ -80,9 +80,10 @@ displayed sum. In the full revised result set, ten skaters fall below the PK-use
 threshold and nine require the coverage fallback. None of these 19 skater comparisons
 uses PK; two of those skaters are omitted from the author's selected article figures.
 
-These are declared descriptive weights, not empirically learned estimates. Retain the
-old model as a labeled baseline and report changed matches if the primary model changes.
-The exact definitions and distance equation are in [methods.md](methods.md).
+These are declared descriptive weights, not empirically learned estimates. The old
+model remains a labeled baseline, and changed matches are reported in the sensitivity
+files. The [primary definitions](revised-method.md) and [shared equations](methods.md)
+make the distinction explicit.
 
 ## Explaining the PP reference
 

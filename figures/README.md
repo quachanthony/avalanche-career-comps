@@ -1,4 +1,8 @@
-# Article figures
+# Original baseline figures
+
+These are the original career-length/PK-restricted figures. The selected primary
+model is in [the current figure guide](revision-v2/README.md). The baseline is retained
+for comparison and is not the current article model.
 
 These are the final full-career figures, in article order.
 Burgundy identifies the target player; blue identifies the named comparison in the roster

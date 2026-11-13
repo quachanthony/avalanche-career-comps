@@ -22,7 +22,7 @@ from . import (
 )
 
 
-def production_weights(include_career_games=True):
+def production_weights(include_career_games=False):
     """Retain declared production-weight proportions; make career length an explicit choice."""
     selected = {
         key: value
@@ -33,7 +33,7 @@ def production_weights(include_career_games=True):
     return {key: value / total for key, value in selected.items()}
 
 
-def rank_preserving_pool(target, pool, ice_time, *, include_career_games=True):
+def rank_preserving_pool(target, pool, ice_time, *, include_career_games=False):
     """Omit an unavailable feature rather than exclude an otherwise eligible historical player."""
     weights = production_weights(include_career_games)
     target_pk = special_teams.pk_context(target, ice_time)
@@ -91,7 +91,7 @@ def rank_preserving_pool(target, pool, ice_time, *, include_career_games=True):
     )
 
 
-def common_defender_report(bundle, scoring, rates, article, *, include_career_games=True):
+def common_defender_report(bundle, scoring, rates, article, *, include_career_games=False):
     """Use exactly the roster's complete eligible defenseman pool for the Cale comparison."""
     last = bundle["config"]["last_season"]
     league = {r["season_id"]: r for r in bundle["league"]}
@@ -136,8 +136,8 @@ def common_defender_report(bundle, scoring, rates, article, *, include_career_ga
     return result
 
 
-def analyze(*, include_career_games=True):
-    """Keep source records and goalie method fixed while making the proposed skater revision explicit."""
+def analyze(*, include_career_games=False):
+    """Keep source records and goalie method fixed while making the selected skater method explicit."""
     bundle, scoring, rates, ice, goalie, manifest = pipeline.load()
     bundle, policy = article_analysis.with_skater_eligibility(bundle, 82)
     ranker = partial(rank_preserving_pool, include_career_games=include_career_games)
@@ -178,7 +178,7 @@ def analyze(*, include_career_games=True):
     return reports, manifest
 
 
-def run(out, *, include_career_games=True, figures=True):
+def run(out, *, include_career_games=False, figures=True):
     """Save a separate reviewed revision and its exact changes from the published baseline."""
     out = Path(out)
     if out.exists() and any(out.iterdir()):
@@ -289,11 +289,24 @@ def run(out, *, include_career_games=True, figures=True):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--out", type=Path, required=True)
-    parser.add_argument("--omit-career-games", action="store_true")
+    career = parser.add_mutually_exclusive_group()
+    career.add_argument(
+        "--include-career-games",
+        action="store_true",
+        dest="include_career_games",
+        help="Sensitivity control: add career length to the similarity score.",
+    )
+    career.add_argument(
+        "--omit-career-games",
+        action="store_false",
+        dest="include_career_games",
+        help="Compatibility flag: career games are already omitted by default.",
+    )
+    parser.set_defaults(include_career_games=False)
     parser.add_argument("--no-figures", action="store_true")
     args = parser.parse_args()
     reports = run(
-        args.out, include_career_games=not args.omit_career_games, figures=not args.no_figures
+        args.out, include_career_games=args.include_career_games, figures=not args.no_figures
     )
     print("Cale nearest match:", reports["makar"]["isolation"]["rows"][0])
     print("Saved revised article package under", args.out)

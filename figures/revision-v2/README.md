@@ -1,9 +1,10 @@
-# Proposed revised article figures
+# Current article figures
 
-This review version uses all eligible alumni and five rate statistics. Career games are
-unweighted context. The original baseline remains at [commit2033214](https://github.com/quachanthony/avalanche-career-comps/tree/2033214/figures).
+The primary article uses full observed careers, all eligible alumni and five rate
+statistics. Career games are unweighted sample-size context. The same-age comparison
+remains a separate supplement. The original baseline remains at [commit 2033214](https://github.com/quachanthony/avalanche-career-comps/tree/2033214/figures).
 
-[Revised method](../../docs/revised-method.md) · [Reproduce the package](../../README.md) · [Alt text](alt-text.csv) · [Figure checksums](manifest.json)
+[Current method](../../docs/revised-method.md) · [Reproduce the package](../../README.md) · [Alt text](alt-text.csv) · [Figure checksums](manifest.json)
 
 ## Preview
 

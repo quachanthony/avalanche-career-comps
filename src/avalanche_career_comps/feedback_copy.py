@@ -136,7 +136,7 @@ def explanations(reports):
         "quality-start counts are used, rather than another provider's definition.",
         "source": "Statistics come from official NHL player pages and NHL Stats reports. "
         "The frozen inputs, equations, complete weights and reproduction code "
-        "for this proposed revision are at https://github.com/quachanthony/avalanche-career-comps/tree/codex/article-feedback . "
+        "are at https://github.com/quachanthony/avalanche-career-comps . "
         "Official TOI coverage: https://media.nhl.com/site/vasset/public/attachments/2023/06/17229/AllRookieTeam.pdf .",
         "closing": "The data and code to reproduce these comparisons are available on GitHub. "
         "I’ll keep using this space to learn in public and explore Avs hockey with data. "

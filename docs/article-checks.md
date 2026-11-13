@@ -1,44 +1,46 @@
-# Interpreting the comparisons
+# Interpreting the current comparisons
 
-These distinctions matter when reading the article or reusing its results. The complete
-reproducible definitions are in [methods.md](methods.md).
+The primary article model uses full observed careers and five rate statistics. Career
+games are unweighted context; the separate same-age run is a sensitivity check. The
+complete definitions are in [the current method](revised-method.md).
 
-* **Identify the fixed roster and cutoff.** Suggested addition: “The roster is the
-  November 10, 2026 snapshot; the statistics stop at the completed 2025–26 regular
-  season.” “Current” does not mean the reader's live roster or 2026–27 statistics.
-* **State the weights and career-length transformation.** Career games enter as
-  `log(1 + GP)`, although charts display actual GP. The six-stat weights are the
-  seven-stat weights renormalized after PK is omitted. They are declared project
-  choices, not fitted or externally validated weights. See
-  [`analysis._rank`](../src/avalanche_career_comps/analysis.py) and
-  [`special_teams.rank_without_lift`](../src/avalanche_career_comps/special_teams.py).
-* **Broaden the PK coverage caveat.** Replace the parenthetical suggesting only
-  pre-1995 minutes are missing with: “Historical PK minutes are incomplete; I required
-  audited coverage for every season in the comparison window.” Forsberg has usable
-  audited PK records for only 315 of 708 games, so later availability is not assumed.
-  See `special_teams.pk_context` in the source linked above.
-* **Explain Barrie versus Bourque before the Cale radar.** Suggested sentence: “For
-  this broader comparison, I left PK minutes out for everyone so Bourque and Ozolinsh
-  could be included despite incomplete minutes.” The roster's PK-covered pool has
-  29 defensemen; the common six-stat Cale analysis has 45. See
-  [`makar_compact.consolidate`](../src/avalanche_career_comps/makar_compact.py).
-* **Keep 4.6× limited to the measured gap.** Suggested wording: “Makar's nearest-match
-  gap is 4.6 times the median nearest-match gap among the 45 eligible former Avs
-  defensemen.” It is not a quality multiplier, NHL-wide claim or probability of seeing
-  another Makar. Career length contributes about 38% of his squared gap from Bourque.
-  The article's eye-test judgment can remain an opinion, separate from that number.
-* **Do not infer Forsberg has no present-day analogue from his absence as a first
-  choice.** Nearest matches need not be reciprocal, and reversing the search changes
-  the eligible pool and its scales. Suggested transition: “Forsberg did not appear as
-  anyone's closest match, so I reversed the question and looked for his closest
-  comparison among past and present Avs.” See
-  [`reverse_similarity.compare`](../src/avalanche_career_comps/reverse_similarity.py).
-* **Keep goalie labels precise.** QS+/SO+ are league-relative rates rather than raw
-  percentages. The NHL's quality-start threshold is strictly greater than .900; the
-  code uses its supplied `qualityStart` counts. All four goalie features have 25%
-  weight. These are not WAR or GSAx. See
-  [`goalie_performance.features`](../src/avalanche_career_comps/goalie_performance.py)
-  and [`goalie_revision.WEIGHTS`](../src/avalanche_career_comps/goalie_revision.py).
+- **Use the fixed roster and cutoff.** The roster is the November 10, 2026 snapshot;
+  statistics stop at the completed 2025–26 regular season. “Current” does not mean a
+  live roster or current-season statistics.
+- **Distinguish rates from career length.** The matching features are adjusted goals,
+  assists, shots and PP points per 82 games plus unadjusted PIM/82. Displayed GP shows
+  exposure and does not affect the score. Full-career averages can still reflect
+  late-career decline, and current players' careers remain unfinished.
+- **State the weights.** Goals and assists each receive 25%, shots 21.43%, PIM 14.29%
+  and PP points 14.29%, rounded. These are declared descriptive choices, not learned
+  or externally validated weights. See
+  [`feedback_analysis.production_weights`](../src/avalanche_career_comps/feedback_analysis.py).
+- **Preserve eligible players when minutes are missing.** Official NHL time-on-ice
+  records begin in 1997–98, and later records can also be incomplete or disagree.
+  Missing minutes are never zero. PK is omitted unless the target and every eligible
+  candidate have complete audited minutes; it never removes an eligible alumnus.
+  No full-career skater comparison in this dataset uses PK under that rule.
+- **Use the same Makar headline in both places.** Both the roster card and the Cale
+  overlay compare all 45 eligible alumni with the same five rate statistics and name
+  Ray Bourque. The old Barrie result came from a different model with a PK-restricted
+  pool; it belongs only to the historical baseline.
+- **Interpret 5.13× as a distance ratio.** Makar's nearest-match gap is 1.401108,
+  versus a median historical nearest-match gap of 0.272958. Their ratio is 5.133045.
+  It is not a quality multiplier, difficulty measure, probability or NHL-wide claim.
+  The old 4.61× value includes career length and must not label the primary model.
+- **Treat the Forsberg ordering cautiously.** Sakic and Rantanen have gaps of 1.139993
+  and 1.143946—almost tied. MacKinnon is third. Nearest matches need not be reciprocal,
+  and reversing the search changes both the eligible pool and its statistical ruler.
+  Absence from a roster player's first choice does not establish lack of resemblance.
+- **Keep goalie labels precise.** SV+, adjusted SA/G, QS+ and SO+ each receive 25%.
+  The NHL's supplied quality-start counts are used. These descriptive rates do not
+  measure WAR or GSAx and do not isolate the goalie from team defense. See
+  [the unchanged goalie equations](methods.md#goalies).
+- **Read the gap within its model.** Lower weighted statistical distance means closer
+  recorded profiles, not a higher similarity percentage or a calibrated quality grade.
+  Different pools and feature sets use different spreads. Radar overlap is not the score.
+- **Keep colors tied to roles.** Burgundy means the named target, including Forsberg;
+  blue means the named comparison. The Cale overlay has an explicit five-player legend.
 
-See [the equations and variable definitions](methods.md) for the separate assist
-denominator, PP reference rate, population standard deviations and normalized weights.
+The baseline remains reproducible, and the `--include-career-games` control separates
+career length from the PK policy change. Neither control is the primary article model.

@@ -49,7 +49,9 @@ def test_pk_requires_every_candidate_and_keeps_exactly_ten_percent_weight(career
 def test_career_length_can_be_context_without_affecting_the_match():
     target = profile(7, log_games=8)
     pool = [profile(1, log_games=3), profile(2, log_games=8)]
-    with_games, _, _ = feedback_analysis.rank_preserving_pool(target, pool, {})
+    with_games, _, _ = feedback_analysis.rank_preserving_pool(
+        target, pool, {}, include_career_games=True
+    )
     without_games, _, details = feedback_analysis.rank_preserving_pool(
         target, pool, {}, include_career_games=False
     )
@@ -60,7 +62,7 @@ def test_career_length_can_be_context_without_affecting_the_match():
 
 
 def test_pool_preserving_article_and_cale_overlay_agree_and_leave_goalies_unchanged():
-    reports, _ = feedback_analysis.analyze()
+    reports, _ = feedback_analysis.analyze(include_career_games=True)
     baseline, _ = pipeline.analyze()
     previous_goalies = {
         (r["window"], r["player_id"]): r for r in baseline["roster"]["rows"] if r["position"] == "G"
@@ -94,3 +96,14 @@ def test_production_only_sensitivity_recalculates_the_benchmark_and_neighbours()
     bourque = next(r for r in case["rows"] if r["player_id"] == 8445621)
     assert bourque["nearest_id"] == 8480069
     assert 8445621 in case["changed_historical_neighbours"]
+
+
+def test_selected_default_omits_career_length_and_keeps_full_careers_primary():
+    reports, _ = feedback_analysis.analyze()
+    assert reports["method_revision"]["career_games_weighted"] is False
+    assert "Full observed careers primary" in reports["method_revision"]["career_window"]
+    for row in reports["roster"]["rows"]:
+        assert "log_games" not in row["weights"]
+    assert reports["makar"]["isolation"]["rows"][0]["ratio_to_median"] == pytest.approx(
+        5.1330451175
+    )

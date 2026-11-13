@@ -1,116 +1,96 @@
 # Avalanche career comparisons
 
-## Proposed article-feedback revision
-
-The new [rate-profile revision](docs/revised-method.md) preserves every eligible alumnus,
-removes career games from the matching score, and supplies phone-readable charts, visible
-gaps, a same-age example, alt text and article-ready explanations. The original baseline
-below remains reproducible. This is a model revision: many matches change, and Cale’s
-ratio becomes 5.13× rather than reusing the old 4.61×.
-
-```sh
-uv run --locked --group analysis python -m avalanche_career_comps.feedback_analysis \
-  --omit-career-games --out local/article-feedback
-```
-
-Open `local/article-feedback/article-preview.html`. See the [revision figures](figures/revision-v2/README.md)
-and the [factual and prose corrections](docs/article-revision-notes.md). Omit
-`--omit-career-games` to retain career length while fixing only the PK pool policy.
-
-## Original article baseline
-
 Which former Avalanche players have NHL careers most similar to the current roster?
-This is the reproducible analysis behind Anthony's first Avalanche Substack article,
-including the Cale Makar and Peter Forsberg comparisons.
+This project reproduces the figures and analysis behind Anthony's Avalanche article.
 
-**Start with the [article figures](figures/README.md), [method and equations](docs/methods.md),
-or [data sources](docs/sources.md).** Full observed careers are the main analysis;
-a separate through-age comparison is retained as an optional supplement.
+**The primary model compares full observed careers using five rate statistics. Career
+games are displayed as sample-size context and carry no similarity weight.** A separate
+same-age supplement is included. Missing PK minutes never exclude an otherwise eligible
+comparison player.
 
-![All Hail Cale](figures/all-hail-cale.png)
+Start with the [current figures](figures/revision-v2/README.md),
+[method and weights](docs/revised-method.md), or [data sources](docs/sources.md).
 
-## Reproduce the article
+![MacKinnon and Sakic](figures/revision-v2/opener-mackinnon.png)
+
+## Reproduce the primary article
 
 From the repository root, with Python 3.11 or newer and [uv](https://docs.astral.sh/uv/):
 
 ```sh
 uv sync --locked --group analysis --group dev
-uv run --locked --group analysis python -m avalanche_career_comps.pipeline
+uv run --locked --group analysis python -m avalanche_career_comps.feedback_analysis \
+  --out local/article
 ```
 
-Open `local/projects/avalanche-career-comps/article/index.html` in a browser.
-The command verifies the input checksum, recalculates features and matches from the
-included season-level data, checks the published numerical reference, and draws the
-figures. No PostgreSQL setup, database credentials or data downloads are needed.
+Open `local/article/article-preview.html` for the paired-image reading order. No database,
+credentials or downloads are needed. The command recomputes both career windows, the
+Cale comparison and the Forsberg search from the included normalized season records.
+Use a fresh destination; nonempty directories are protected from overwriting.
 
-Choose a fresh destination for another run; existing nonempty directories are protected:
+The output includes phone-readable individual charts, two-panel alternatives, a
+1200×675 preview, `alt-text.csv`, article explanations, raw results, a change ledger,
+controlled sensitivities and a checksum manifest. Full-career figures are primary;
+`age-adjusted/` is a separately labeled supplement with an example shown in the reading preview.
+
+## What the current model measures
+
+The roster was collected on **November 10, 2026**, with NHL regular-season statistics
+through completed **2025–26**. Skater alumni need **82 Colorado appearances**; goalies
+need **50**. Once eligible, their NHL careers across all teams count. Forwards,
+defensemen and goalies are compared separately. The Forsberg reverse search intentionally
+allows both current and former Avs. NHL IDs identify players; names are display labels.
+
+Skaters use era-adjusted goals, assists, shots and PP points per 82 games, plus unadjusted
+PIM/82. Their weights are **25%, 25%, 21.4%, 14.3% and 14.3%**, respectively. GP is context,
+not a spoke or part of the score. PK could receive 10% only when the entire eligible pool
+and target have complete audited records and the target averages at least one PK minute
+per game; none of the full-career skater comparisons meets that full-pool condition.
+
+The historical pool remains intact: Makar and Burns each retain all **45** eligible
+former defensemen. Makar matches **Bourque**, and Burns matches **Ozolinsh**. The Cale
+roster chart and special overlay use the same matching statistics and name the same
+nearest player. Makar's distance is **1.401108**, versus the alumni median nearest-match
+distance **0.272958**, giving **5.133×**. That ratio measures distance, not difficulty,
+quality, a probability or NHL-wide uniqueness.
+
+Forsberg's gaps to Sakic and Rantanen are **1.140** and **1.144**, so they are effectively
+near-tied descriptions rather than meaningfully separated styles. Goalies retain the
+four performance measures, each at 25%: SV+, adjusted SA/G, QS+ and SO+. Games and starts
+are sample-size context. These are descriptive comparisons, not forecasts or a complete
+player-value model.
+
+## Preserved controls
+
+Add `--include-career-games` to run the pool-preserving control that weights career
+length. It gives Makar a **4.61×** ratio; do not mix that number with the five-stat model.
+`--omit-career-games` remains an optional compatibility flag for the current default.
+Both controls are recorded in `career-length-sensitivity.csv` and `sensitivity-summary.json`.
+
+The [original published baseline](https://github.com/quachanthony/avalanche-career-comps/tree/2033214)
+retains the prior restricted PK pools and career-length weights. It remains reproducible:
 
 ```sh
 uv run --locked --group analysis python -m avalanche_career_comps.pipeline \
-  --out local/projects/avalanche-career-comps/reproduction
-
-uv run --locked --group analysis python -m avalanche_career_comps.pipeline \
-  --no-figures --out local/projects/avalanche-career-comps/numerical-check
+  --out local/original-baseline
 ```
 
-| Output | Contents |
-| --- | --- |
-| `full-career/` | Eight roster rows, **All Hail Cale**, and **Loosely, the Moose**, as PNG/SVG |
-| `age-adjusted/` | Eight separate roster rows through the same season-age |
-| `matches.csv` | Both windows' roster matches, distances and candidate counts |
-| `*-results.json` | Features, weights, spreads, coverage decisions and distance contributions |
-| `article-note.txt` | One explanation for the roster figures |
-| `manifest.json` | Input/code/output checksums and Python/package versions |
+The [baseline equations](docs/methods.md) are historical documentation; the current
+selection and exact weights are in [the primary method](docs/revised-method.md).
+No weights were fitted or searched to obtain a preferred player match.
 
-## Scope and interpretation
+## Data, provenance and checks
 
-The roster was collected on **November 10, 2026**. Statistics stop at the completed
-**2025–26 regular season**. This is a frozen historical snapshot, not a live roster
-or a current-season forecast.
+- [Portable season-level inputs](research/article-inputs.json): player histories, league
+  environments, PP counts, audited PK records and goalie start/quality-start counts.
+- [Input manifest](research/input-manifest.json): 405 source URL/time/hash records and
+  the warehouse publication fingerprint. No raw response archives or credentials are included.
+- [Original numerical reference](research/expected-results.json): protects the preserved
+  baseline while explicit regression tests protect the revised model and defaults.
 
-Former skaters need **82 Colorado regular-season appearances**; goalies need **50**.
-Colorado eligibility starts in 1995–96. Qualifying players' NHL records across all
-teams count, including Quebec seasons. Forwards, defensemen and goalies are matched
-separately. The roster search excludes current roster members from the alumni pool;
-the Forsberg reverse search intentionally admits current as well as former Avs.
-The displayed groups are the author's presentation choices, not inferred playing lines.
-Hughes is labeled **Not enough data**. Result files retain additional ranked roster
-players omitted from the article's images.
-
-Skaters use era-adjusted goals, assists, shots and PP points per 82 games, unadjusted
-penalty minutes per 82, and log-transformed career games. Complete PK minutes enter
-for regular penalty killers when coverage permits. Goalies use save percentage above
-league, adjusted shots faced per appearance, and season-relative quality-start and
-shutout rates. [The method](docs/methods.md) gives exact formulas and weights.
-
-**Why Barrie in the roster chart but Bourque in the Cale comparison?** The roster's
-Makar comparison includes PK and ranks 29 alumni with complete records. The special
-five-player radar uses six common statistics without PK across all 45 eligible alumni,
-so Bourque and Ozolinsh can participate without invented minutes. Bourque is closest
-under those shared-stat rules. Makar's nearest-match gap is 1.5695 versus a historical
-median of 0.3405, or **4.61×**. This measures profile isolation within that pool, not
-how much better he is. Career length contributes 38% of his squared gap from Bourque.
-
-**Forsberg's reverse search** has 97 eligible past and present forwards. Rantanen,
-Sakic and MacKinnon are the first three matches. A nearest match need not be mutual,
-and statistical similarity does not establish identical styles or overall ability.
-
-## Included data and provenance
-
-- [Article inputs](research/article-inputs.json): a compact derived dataset of player-season
-  counts, league environments, audited PK observations, and goalie starts/quality starts.
-- [Input manifest](research/input-manifest.json): source URLs, retrieval times, response hashes,
-  table grains and the warehouse publication fingerprint.
-- [Expected results](research/expected-results.json): the numerical reference from the selected
-  article outputs, checked against fresh calculations rather than used to generate them.
-
-Stable NHL IDs join observations; names are labels. Traded-player totals and team stints
-are handled explicitly. Missing minutes remain missing. No credentials, database dumps
-or raw response archives are included. This reproduces the analysis **from normalized
-season records**, not the warehouse ingestion itself. [Source notes](docs/sources.md)
-describe that boundary and upstream attribution.
-
-## Validation and limitations
+NHL time-on-ice records begin in **1997–98**, and later records can also be incomplete.
+Missing values remain missing. Hughes has no NHL regular-season history within the
+completed 2025–26 cutoff, so no comparison is assigned. See [coverage notes](docs/article-revision-notes.md).
 
 ```sh
 uv run --locked --group analysis --group dev pytest -q tests
@@ -118,32 +98,8 @@ uv run --locked --group dev ruff check .
 uv run --locked --group dev ruff format --check .
 ```
 
-Tests cover calculations, exposure, age cutoffs, eligibility, missing values, stable
-identities, PK coverage, goalie features and nearest matches. The offline pipeline checks
-both roster windows and both special analyses against the published reference. Figures
-are checked numerically and visually. This validates reproducibility, not predictive accuracy.
-
-Weights are declared descriptive choices, not learned parameters. This is inspired by
-prior hockey similarity work, **not a verbatim Hockey-Reference implementation**. Scoring
-features overlap, missing PK coverage changes some pools, and current careers are unfinished.
-See [methods](docs/methods.md) and [interpretation notes](docs/article-checks.md) before
-reusing a claim.
-
-## Project layout
-
-```text
-docs/                 method, sources and interpretation notes
-figures/              ten final article PNGs and their manifest
-research/             portable inputs, provenance and numerical reference
-src/avalanche_career_comps/
-  pipeline.py         single reproduction entry point
-  analysis.py, era.py  career windows and era-normalized profiles
-  special_teams.py    PP production, PK coverage and skater matching
-  goalie_*.py         goalie performance inputs and features
-  *_radar.py          article graphics
-tests/                hand-auditable fixtures and offline reproduction checks
-```
-
-This standalone repository contains the article analysis and final figures. Abandoned
-experiments, prior renders and the original warehouse/backfill tooling remain in the
-author's separate local archive and warehouse project; they are not required here.
+Tests cover the frozen baseline, complete candidate pools, missingness, age windows,
+era/exposure calculations, unweighted GP, goalie features, nearest-match math and
+article explanations. Images are inspected at 390px phone width. This validates
+reproduction and definitions, not predictive accuracy. See [interpretation notes](docs/article-checks.md)
+for the model's limits and [the figure guide](figures/revision-v2/README.md) for upload-ready PNGs.

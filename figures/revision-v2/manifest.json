@@ -1,5 +1,5 @@
 {
-  "description": "Proposed article-feedback revision: full eligible pools; career games unweighted; source data and goalie model unchanged.",
+  "description": "Primary full-career rate-profile model: full eligible pools; career games unweighted; source data and goalie model unchanged.",
   "input_sha256": "9e5f288e212e94a1785c92036bf7833b473e7f6ff473da5ed7a61e3ff6800409",
   "method_revision": {
     "pk_policy": "Preserve all otherwise eligible alumni; omit PK if the full comparison pool lacks complete audited coverage.",
@@ -15,8 +15,8 @@
     "article_radar.py": "8b4445f003210a592c21183e5b41342287f73400f19b7204c602eb2580505164",
     "distinctiveness.py": "e2a6e0c4e4d75c9a6dc0a61fcea023f22b9c7235da5313bb9514de88684ab818",
     "era.py": "15ca05efcc9b1091d49354af13aa17ed7f1b2793c374c16570e2aa07f01dae28",
-    "feedback_analysis.py": "7bfc5cb24eb86fd0717159bdb1ed76018a63bfb73f8c1ba106bb90b4e0e052d8",
-    "feedback_copy.py": "8bcf599707943f72859c8b9283b4e01a45705805c58312a665e47faa0683774e",
+    "feedback_analysis.py": "31dd542d06640a9f1c939e743e645cb7543519d72d8ab05ea65d2591a2e94114",
+    "feedback_copy.py": "36ae64b611b919ba94d6bf4d72967598616bf08f89cc3bbb56763cf22c460acc",
     "feedback_graphics.py": "007d2404612ed00bc405ea2d64081abda3b2007043a93d481498529d020559be",
     "goalie_performance.py": "0c4317770d054c5f2de98896c660504fab8193999c02d27441c7e62f4aec873a",
     "goalie_quality.py": "1e198b49162bafd29c0b27f9bc4c1a6727393f64d72730f5c8c8609ab1bc5e0e",
@@ -65,5 +65,6 @@
     "all-hail-cale.png": "full-career/all-hail-cale.png",
     "loosely-the-moose.png": "full-career/loosely-the-moose.png",
     "same-age-mackinnon.png": "age-adjusted/individual/8477492-nathan-mackinnon.png"
-  }
+  },
+  "model_status": "Primary model selected by the author: full careers, unweighted GP context."
 }

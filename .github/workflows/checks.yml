@@ -21,4 +21,4 @@ jobs:
       - run: uv run --locked --group dev ruff check .
       - run: uv run --locked --group dev ruff format --check .
       - run: uv run --locked --group analysis python -m avalanche_career_comps.pipeline --no-figures --out local/ci-reproduction
-      - run: uv run --locked --group analysis python -m avalanche_career_comps.feedback_analysis --omit-career-games --no-figures --out local/ci-feedback
+      - run: uv run --locked --group analysis python -m avalanche_career_comps.feedback_analysis --no-figures --out local/ci-feedback
